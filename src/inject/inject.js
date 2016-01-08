@@ -11,3 +11,5 @@ chrome.extension.sendMessage({}, function(response) {
 	}
 	}, 10);
 });
+
+//alert("Hello from quotationize!");

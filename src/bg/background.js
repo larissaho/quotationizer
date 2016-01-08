@@ -6,8 +6,9 @@
 
 
 //example of using a message handler from the inject scripts
-chrome.extension.onMessage.addListener(
-  function(request, sender, sendResponse) {
-  	chrome.pageAction.show(sender.tab.id);
-    sendResponse();
-  });
+
+chrome.contextMenus.create({"title": "Copy Quotation", "id": "quoteCopy", "onclick": onClickAction});
+
+function onClickAction(info, tab){
+	window.open("https://www.washington.edu");
+}
