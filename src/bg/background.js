@@ -7,8 +7,22 @@
 
 //example of using a message handler from the inject scripts
 
-chrome.contextMenus.create({"title": "Copy Quotation", "id": "quoteCopy", "onclick": onClickAction});
+chrome.contextMenus.create({"title": "Copy Quotation", "id": "quoteCopy", "onclick": onClickAction, "contexts": ["selection"]});
 
 function onClickAction(info, tab){
-	window.open("https://www.washington.edu");
+	storeQuote(info.selectionText,window.location.href);	
+}
+
+function storeQuote(selectionText, siteUrl){
+	var newQuote = {};
+	newQuote[selectionText] = siteUrl;
+	chrome.storage.sync.set(newQuote, function() { 
+		console.log("Text Saved");
+	});
+}
+
+function getStoreQuote(){
+	chrome.storage.sync.get(null, function(storageData) {
+		console.log("StorageArea.get: ", storageData);
+	});
 }
