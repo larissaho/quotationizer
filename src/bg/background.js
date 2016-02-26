@@ -6,11 +6,12 @@
 
 
 //example of using a message handler from the inject scripts
-
-chrome.contextMenus.create({"title": "Copy Quotation", "id": "quoteCopy", "onclick": onClickAction, "contexts": ["selection"]});
+chrome.runtime.onInstalled.addListener(function() {
+  chrome.contextMenus.create({"title": "Copy Quotation", "id": "quoteCopy", "onclick": onClickAction, "contexts": ["selection"]});
+});
 
 function onClickAction(info, tab){
-	storeQuote(info.selectionText,window.location.href);	
+	storeQuote(info.selectionText,window.location.href);
 }
 
 function storeQuote(selectionText, siteUrl){
